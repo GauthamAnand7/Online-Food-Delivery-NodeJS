@@ -1,0 +1,52 @@
+create table user(user_id int not null primary key,
+                  user_name varchar(30) not null,
+                  address varchar(100) not null,
+                  phone int(10) not null unique,
+                  email varchar(30),
+                  password varchar(20) not null default'12345678' check(password>10000000));
+
+create table products(product_id int not null primary key,
+                     p_name varchar(100) not null,
+  		             price int(5) not null,
+ 		             c_id int references category(category_id) on delete set null,
+                     res_id int not null references restaurant(restaurant_id) on delete cascade,
+                     image_url text(100000) default null);
+
+create table category(category_id int not null primary key,
+                      category_name varchar(100) default "none");
+create table restaurant(restaurant_id int not null primary key,
+                        restaurant_name varchar(30) not null,
+                        address varchar(100) not null,
+                        phone int(10) not null unique,
+                        email varchar(30),
+                        password varchar(20) not null default'12345678' check(password>10000000),
+                        description text default null);
+
+create table orders(order_id int not null primary key auto_increment,
+                     p_id int not null,
+  		             u_id int not null,
+                       res_id int not null);
+
+create table res_orders(order_id int not null,
+                    p_id int not null,
+  		            u_id int not null,
+                    res_id int not null);
+
+create table bill(bill_id int not null primary key auto_increment,
+                       u_id int not null);
+
+create table blog(blog_id int not null primary key auto_increment,
+                    res_id int not null,
+                    image_url text(100000) not null,
+                    title text(100000) not null,
+                    body text(100000) not null,
+                    likes int not null
+                    date Date);
+
+create table likes(blog_id int not null,
+                u_id int not null);
+
+create table total_orders(order_id int not null,
+                    p_id int not null,
+  		            u_id int not null,
+                    res_id int not null);

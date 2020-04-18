@@ -1,0 +1,194 @@
+
+<html>
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
+
+    <title>Restaurant menu</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="assets/css/fontawesome.css">
+    <link rel="stylesheet" href="assets/css/templatemo-style.css">
+    <link rel="stylesheet" href="assets/css/owl.css">
+
+  </head>
+
+<body class="is-preload">
+
+    <!-- Wrapper -->
+    <div id="wrapper">
+
+      <!-- Main -->
+        <div id="main">
+          <div class="inner">
+
+            <!-- Header -->
+            <header id="header">
+              <div class="logo">
+                <a href="index.ejs"></a>
+              </div>
+            </header>
+
+            <!-- Page Heading -->
+            <div class="page-heading">
+            
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-md-12">
+
+                  
+                    <p><strong>You can edit/update your data here.</strong></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Tables -->
+            <section class="tables">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="section-heading">
+                      <h2>Menu</h2>
+                    </div>
+                    <div class="default-table">
+                      <table>
+                          <thead>
+                              <tr>
+                                <th>Product no.</th>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>Image</th>
+                              </tr>
+                            </thead>
+                            <div></div>
+                            <tbody>
+                              <%for(var i=0;i < res.length;i++){%>
+                                
+                              <tr>
+                                <td><%=res[i].product_id%></td>
+                                <td><%=res[i].p_name%></td>
+                                <td><%=res[i].price%></td>
+                                <td><img src="images/<%=res[i].image_url%>"  height="7" width="1"></td>
+                                <form action="/delete/<%=res[i].product_id%>" method="get">
+                                  <input type="hidden" name="product" value="<%=res[i].product_id%>">
+                                <td><input type="submit" name="Delete" id='<%=res[i].product_id%>' value="X" ></td>
+                                </form>
+                              </tr>
+                              <%}%>
+                            </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- Forms -->
+            <section class="forms">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-md-12">
+                    <form id="contact" action="\updateRes_menu" method="post" enctype="multipart/form-data">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <fieldset>
+                            <input name="name" type="text" class="form-control" id="name" placeholder="Item name" required="">
+                          </fieldset>
+                        </div>
+                        <div class="col-md-6">
+                          <fieldset>
+                            <input name="price" type="text" class="form-control" id="price" placeholder="Item price" required="">
+                          </fieldset>
+                        </div>
+                        <div class="col-md-12">
+                          <select name="category" id="category">
+                            <option value=0 selected>Select Category</option>
+                            <option value=1>pizza</option>
+                            <option value=2>drinks</option>
+                          </select>
+                        </div>
+                        <div class="col-12">
+                          <textarea name="demo-message" id="demo-message" placeholder="Enter description" rows="6"></textarea>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="upload-btn-wrapper">
+                                <button class="filled-round-button">Upload an image</button>
+                              <input name="images" type="file"/>
+                            </div>
+                          </div>
+                        <div class="col-md-6">
+                          <div class="filled-round-button">
+                          <button type="submit" id="form-submit" >Add to Menu</button>
+                        </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+          </div>
+        </div>
+
+      <!-- Sidebar -->
+        <div id="sidebar">
+
+          <div class="inner">
+
+            <!-- Search Box -->
+            <section id="search" class="alt">
+              <form method="get" action="#">
+                <input type="text" name="search" id="search" placeholder="Search..." />
+              </form>
+            </section>
+              
+            <!-- Menu -->
+           <nav id="menu">
+              <ul>
+                <li><form action="/res_home" id="formosubmit" method="post" onclick="document.getElementById('formosubmit').submit()">Home</form></li>
+                <li><a href="res_update.ejs">Update Details</a></li>
+                <li><form action="/res_loadorder" id="formsubmit" method="get" onclick="autosubmit()">Orders</form></li>
+                <li><form action="/res_blog" id="formbsubmit" method="get" onclick="document.getElementById('formbsubmit').submit()">Blog</form></li>
+                <li><form action="/res_stat" id="formtsubmit" method="post" onclick="document.getElementById('formtsubmit').submit()">Stats</form></li>
+              </ul>
+            </nav>
+
+          
+            <!-- Footer -->
+            <footer id="footer">
+              </footer>
+            
+          </div>
+        </div>
+
+    </div>
+
+  <!-- Scripts -->
+  <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/transition.js"></script>
+    <script src="assets/js/owl-carousel.js"></script>
+    <script src="assets/js/custom.js"></script>
+    <script>
+    function autosubmit(){
+      var frm = document.getElementById("formsubmit");
+      frm.submit();
+    }
+  </script>
+            
+</body>
+</html>

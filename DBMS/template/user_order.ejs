@@ -1,0 +1,134 @@
+
+<html>
+
+    <head>
+  
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
+  
+
+      <link rel="stylesheet" type="text/css" href="css/login.css">
+      <!-- Bootstrap core CSS -->
+      <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  
+  
+      <link rel="stylesheet" href="assets/css/fontawesome.css">
+      <link rel="stylesheet" href="assets/css/templatemo-style.css">
+      <link rel="stylesheet" href="assets/css/owl.css">
+  
+    </head>
+  
+  <body class="is-preload">
+  
+      <!-- Wrapper -->
+      <div id="wrapper">
+  
+        <!-- Main -->
+          <div id="main">
+            <div class="inner">
+  
+              <!-- Header -->
+              <header id="header">
+                <div class="logo">
+                  <a href="index.ejs"></a>
+                </div>
+              </header>
+  
+              <!-- Page Heading -->
+              <div class="page-heading">
+              
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-md-12">
+  
+                    
+                      
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Tables -->
+              <section class="tables">
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="section-heading">
+                        
+                      </div>
+                      <%if(results.length > 0){%>
+                      <div class="default-table">
+                        <table>
+                          <thead>
+                            <tr>
+                              <th>Product no.</th>
+                              <th>Name</th>
+                              <th>Quantity</th>
+                              <th>Price</th>
+                              <th></th>
+                            </tr>
+                          </thead>
+                          <div></div>
+                          <tbody>
+                            <%var total=0;
+                            for(var i=0;i < results.length;i++){%>
+                            <tr>
+                              <td><%=results[i].product_id%></td>
+                              <td><%=results[i].p_name%></td>
+                              <td><%=results[i].quant%></td>
+                              <td><%=results[i].total%></td>
+                              <form action="/deleteorder/<%=results[i].order_id%>" method="get">
+                                <input type="hidden" name="product" value="<%=results[i].product_id%>">
+                              <td><input type="submit" name="Delete" id='<%=results[i].product_id%>' value="X" ></td>
+                              </form>
+                            </tr>
+                            <% total=total+results[i].total;}%>
+                          </tbody>
+                        </table>
+                        
+                    <form method="post" id='formsubmit' action="/bill" onclick="document.getElementById('formsubmit').submit();" class="button u-full-width">Pay total:<%=total%></form>
+                      <%} else {%>
+                      <p style="font-size: large;color: blue;">OOPS!Currently you have nothing in your Cart.Add something to your Cart and then return</p>
+                    <%}%>
+                  </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+  
+  
+            </div>
+          </div>
+  
+            
+              <!-- Footer -->
+              <footer id="footer">
+              </footer>
+              
+            </div>
+          </div>
+  
+      </div>
+  
+    <!-- Scripts -->
+    <!-- Bootstrap core JavaScript -->
+      <script src="vendor/jquery/jquery.min.js"></script>
+      <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  
+      <script src="assets/js/browser.min.js"></script>
+      <script src="assets/js/breakpoints.min.js"></script>
+      <script src="assets/js/transition.js"></script>
+      <script src="assets/js/owl-carousel.js"></script>
+      <script src="assets/js/custom.js"></script>
+      <script>
+      function autosubmit(){
+        var frm = document.getElementById("formsubmit");
+        frm.submit();
+      }
+    </script>
+              
+  </body>
+  </html>
